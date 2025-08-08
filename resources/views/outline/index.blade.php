@@ -3,6 +3,15 @@
 @section('content')
   <div class="outline-wrapper">
 
+    <div class="dashboard">
+    <div class="col-span-3" hx-get="{{route('outline.chapters.index')}}" {{-- Activate as soon as the page loads --}}
+      hx-trigger="load" {{-- Dump content into the innerHTML --}} hx-swap="innerHTML"></div>
+
+    <div
+    class="col-span-2" hx-get="{{route('outline.codex.index')}}" 
+      hx-trigger="load" hx-swap="innerHTML"
+    ></div>
+    </div>
 
     <noscript>
     <h1 class="page-title">Outline Home</h1>
