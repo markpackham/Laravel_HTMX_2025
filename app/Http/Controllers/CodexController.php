@@ -12,12 +12,14 @@ class CodexController extends Controller
    */
   public function index(Request $request)
   {
-    // See if request sent via Htmx
-    $isHtmx = $request->hasHeader('HX-Request');
 
     $codexEntries = Codex::orderBy('type')->orderBy('name')->get()->groupBy('type');
+
+    // See if request sent via Htmx
+    $isHtmx = $request->hasHeader('HX-Request');
+    
     // Send back fragment only if an Htmx request otherwise send back entire view
-    return view('outline.codex.index', compact('codexEntries'))
+    return view('outline.codex.index', compact('codexEntries', 'isHtmx'))
       ->fragmentIf($isHtmx, 'codex-list');
   }
 
