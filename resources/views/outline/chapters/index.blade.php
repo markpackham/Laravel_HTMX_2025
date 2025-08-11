@@ -11,7 +11,7 @@
     
     @if($isHtmx)
           hx-get="{{ route('outline.chapters.create') }}"
-          hx-target="#swap"
+          hx-target="#modal"
           hx-swap="innerHTML"
         @endif>
       Add a New Chapter
@@ -25,7 +25,7 @@
       <h2>Chapter {{ $chapter->order }}</h2>
       <a href="{{ route('outline.chapters.show', $chapter) }}" class="chapter-title"             @if($isHtmx)
               hx-get="{{ route('outline.chapters.show', $chapter) }}"
-              hx-target="#swap"
+              hx-target="#modal"
               hx-swap="innerHTML"
             @endif>
       {{ $chapter->title }}
