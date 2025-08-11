@@ -13,7 +13,13 @@
     ></div>
     </div>
 
-    <div class="modal-container">
+    {{-- We hide the modal when there is no content or the content gets cleared --}}
+    <div class="modal-container"
+    hx-get="/modal/empty"
+    hx-target="#modal"
+    hx-swap="innerHTML"
+    hx-trigger="click"
+    >
       <div class="modal-content" id="modal"></div>
     </div>
 
