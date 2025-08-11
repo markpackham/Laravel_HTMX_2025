@@ -17,7 +17,8 @@ class CodexController extends Controller
 
     $codexEntries = Codex::orderBy('type')->orderBy('name')->get()->groupBy('type');
     // Send back fragment only if an Htmx request otherwise send back entire view
-    return view('outline.codex.index', compact('codexEntries'))->fragmentIf($isHtmx, 'codex-entry-list');
+    return view('outline.codex.index', compact('codexEntries'))
+      ->fragmentIf($isHtmx, 'codex-list');
   }
 
   /**

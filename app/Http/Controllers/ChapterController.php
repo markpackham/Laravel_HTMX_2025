@@ -15,7 +15,8 @@ class ChapterController extends Controller
         $isHtmx = $request->hasHeader('HX-Request');
 
         // Send back fragment only if an Htmx request otherwise send back entire view
-        return view('outline.chapters.index', compact('chapters'))->fragmentIf($isHtmx, 'chapter-list');
+        return view('outline.chapters.index', compact('chapters', 'isHtmx'))
+            ->fragmentIf($isHtmx, 'chapter-list');
     }
 
     public function show(Chapter $chapter)
