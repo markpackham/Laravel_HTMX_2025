@@ -14,11 +14,12 @@
     </div>
 
     {{-- We hide the modal when there is no content or the content gets cleared --}}
+    {{-- Via 'target' Only close modal when clicking out of it & not when clicking in it --}}
     <div class="modal-container"
     hx-get="/modal/empty"
     hx-target="#modal"
     hx-swap="innerHTML"
-    hx-trigger="click"
+    hx-trigger="click target:.modal-container"
     >
       <div class="modal-content" id="modal"></div>
     </div>
