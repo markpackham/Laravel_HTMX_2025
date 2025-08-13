@@ -62,7 +62,7 @@ class ChapterController extends Controller
     {
         $isHtmx = $request->hasHeader(('HX-Request'));
 
-        return view('outline.chapters.edit', compact('chapter'))
+        return view('outline.chapters.edit', compact('chapter', 'isHtmx'))
         ->fragmentIf($isHtmx, 'edit-chapter-form');
     }
 
@@ -75,6 +75,14 @@ class ChapterController extends Controller
         ]);
 
         $chapter->update($data);
+
+        $isHtmx = $request->hasHeader('HX-Request');
+
+        if ($isHtmx) {
+            $chapters = Chapter::orderBy('order')->get();
+
+            return view('outline.chapters.index', compact('chapters', 'isHtmx'))->fragments(['chapter-list', 'modal']);
+        }
 
         return redirect()->route('outline.chapters.show', $chapter);
     }
