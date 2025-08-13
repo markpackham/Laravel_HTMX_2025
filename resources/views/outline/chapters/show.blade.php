@@ -24,6 +24,13 @@
       hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
       >Delete Chapter
     </a>
+
+    <a class="btn"
+    hx-get="{{route('outline.chapters.edit')}}"
+    hx-target="#modal"
+    hx-swap="innerHTML"
+    
+    >Edit Chapter</a>
     @else
     <a href="{{ route('outline.chapters.index') }}" class="btn">
       Go back to full chapter timeline
