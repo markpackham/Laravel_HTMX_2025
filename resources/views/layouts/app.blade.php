@@ -13,7 +13,8 @@
   @stack('head')
 </head>
 
-<body>
+{{-- Needed to use csrf tokens with HTMX --}}
+<body hx-header='{"X-CSRF-TOKEN": "{{csrf_token()}}"}'>
   <div class="flex flex-col min-h-screen">
 
     <!-- Header -->
