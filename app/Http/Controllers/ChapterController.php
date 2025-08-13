@@ -62,7 +62,8 @@ class ChapterController extends Controller
     {
         $isHtmx = $request->hasHeader(('HX-Request'));
 
-        return view('outline.chapters.edit', compact('chapter'));
+        return view('outline.chapters.edit', compact('chapter'))
+        ->fragmentIf($isHtmx, 'edit-chapter-form');
     }
 
     public function update(Request $request, Chapter $chapter)
