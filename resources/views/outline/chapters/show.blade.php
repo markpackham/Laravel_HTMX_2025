@@ -26,7 +26,7 @@
     </a>
 
     <a class="btn"
-    hx-get="{{route('outline.chapters.edit')}}"
+    hx-get="{{route('outline.chapters.edit', $chapter)}}"
     hx-target="#modal"
     hx-swap="innerHTML"
     
