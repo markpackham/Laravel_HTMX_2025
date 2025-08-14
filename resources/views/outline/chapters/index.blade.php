@@ -17,7 +17,8 @@
     <div class="sortable">
     @forelse ($chapters as $chapter)
 
-    <div class="chapter" id="chapter-{{ $chapter->id }}">
+    {{-- The data-id is what will be grabbed when we re-sort the list --}}
+    <div class="chapter" id="chapter-{{ $chapter->id }}" data-id="{{$chapter->id}}">
       <div class="chapter-header">
       <h2>Chapter {{ $chapter->order }}</h2>
       <a href="{{ route('outline.chapters.show', $chapter) }}" class="chapter-title" @if($isHtmx)

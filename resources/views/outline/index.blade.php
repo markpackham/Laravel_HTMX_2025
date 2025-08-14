@@ -41,15 +41,32 @@
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 
   <script>
-    // Fires when HTMX dynamically loads content onto the page
     htmx.onLoad(function (content) {
     if (content.id === "chapter-list") {
-      const sortable = document.querySelector('.sortable')
+
+      const sortable = document.querySelector(".sortable")
+
       const sortableInstance = new Sortable(sortable, {
       animation: 150,
       ghostClass: 'sorting',
       onEnd: function () {
-        console.log('reordered')
+        // Collect id's in their new order
+        const order = Array.from(sortable.children).map(
+        child => child.getAttribute('data-id')
+        )
+
+        // Convert array into object
+        let values = {}
+        order.forEach((val, idx) => {
+        values[`order[${idx}]`] = val
+        })
+
+        // Send ajax request to laravel
+        htmx.ajax('POST', '/outline/chapters/reorder', {
+        values: values,
+        target: '#chapter-list',
+        swap: 'outerHTML',
+        });
       }
       })
     }
