@@ -115,6 +115,12 @@ class ChapterController extends Controller
         }
 
         $chapters = Chapter::orderBy('order')->get();
+
+        $isHtmx = $request->hasHeader('HX-Request');
+
+        // Pass chapters with the updated chapter order & the HTMX flag
+        return view('outline-chapters.index', compact('chapters', 'isHtmx'))
+            ->fragment('chapter-list');
     }
 
 }

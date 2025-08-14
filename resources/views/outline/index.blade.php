@@ -61,7 +61,7 @@
         values[`order[${idx}]`] = val
         })
 
-        // Send ajax request to laravel
+        // Send ajax request to Laravel
         htmx.ajax('POST', '/outline/chapters/reorder', {
         values: values,
         target: '#chapter-list',
