@@ -14,7 +14,7 @@
 </head>
 
 {{-- Needed to use csrf tokens with HTMX --}}
-<body hx-header='{"X-CSRF-TOKEN": "{{csrf_token()}}"}'>
+<body hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'>
   <div class="flex flex-col min-h-screen">
 
     <!-- Header -->
