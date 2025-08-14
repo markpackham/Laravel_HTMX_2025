@@ -13,21 +13,23 @@
     </a>
     </div>
 
+    {{-- Will be exposed to Sortable.min.js --}}
+    <div class="sortable">
     @forelse ($chapters as $chapter)
 
-    <div class="chapter" id="chapter-{{ $chapter->id }}">
-    <div class="chapter-header">
+      <div class="chapter" id="chapter-{{ $chapter->id }}">
+      <div class="chapter-header">
       <h2>Chapter {{ $chapter->order }}</h2>
       <a href="{{ route('outline.chapters.show', $chapter) }}" class="chapter-title" @if($isHtmx)
-    hx-get="{{ route('outline.chapters.show', $chapter) }}" hx-target="#modal" hx-swap="innerHTML" @endif>
+      hx-get="{{ route('outline.chapters.show', $chapter) }}" hx-target="#modal" hx-swap="innerHTML" @endif>
       {{ $chapter->title }}
       </a>
-    </div>
-    <div class="chapter-description">
+      </div>
+      <div class="chapter-description">
       {{ Str::words($chapter->description, 10, '...') }}
-    </div>
-    </div>
-
+      </div>
+      </div>
+      </div>
     @empty
     <p class="empty">No chapters yet. Add your first one to get started!</p>
     @endforelse

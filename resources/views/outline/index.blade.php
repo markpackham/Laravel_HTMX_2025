@@ -7,21 +7,14 @@
     <div class="col-span-3" hx-get="{{route('outline.chapters.index')}}" {{-- Activate as soon as the page loads --}}
       hx-trigger="load" {{-- Dump content into the innerHTML --}} hx-swap="innerHTML"></div>
 
-    <div
-    class="col-span-2" hx-get="{{route('outline.codex.index')}}" 
-      hx-trigger="load" hx-swap="innerHTML"
-    ></div>
+    <div class="col-span-2" hx-get="{{route('outline.codex.index')}}" hx-trigger="load" hx-swap="innerHTML"></div>
     </div>
 
     {{-- We hide the modal when there is no content or the content gets cleared --}}
     {{-- Via 'target' Only close modal when clicking out of it & not when clicking in it --}}
-    <div class="modal-container"
-    hx-get="/modal/empty"
-    hx-target="#modal"
-    hx-swap="innerHTML"
-    hx-trigger="click target:.modal-container"
-    >
-      <div class="modal-content" id="modal"></div>
+    <div class="modal-container" hx-get="/modal/empty" hx-target="#modal" hx-swap="innerHTML"
+    hx-trigger="click target:.modal-container">
+    <div class="modal-content" id="modal"></div>
     </div>
 
     <noscript>
@@ -40,3 +33,26 @@
 
   </div>
 @endsection
+
+{{-- Scripts will be rendered in the layout file so the other templates can access them --}}
+@push('scripts')
+
+  {{-- Reorderable drag-and-drop lists for modern browsers and touch devices. --}}
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+  <script>
+    // Fires when HTMX dynamically loads content onto the page
+    htmx.onLoad(function (content) {
+    if (content.id === "chapter-list") {
+      const sortable = document.querySelector('.sortable')
+      const sortableInstance = new Sortable(sortable, {
+      animation: 150,
+      ghostClass: 'sorting',
+      onEnd: function () {
+        console.log('reordered')
+      }
+      })
+    }
+    })
+  </script>
+@endpush
